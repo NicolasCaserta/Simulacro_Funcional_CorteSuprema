@@ -1,0 +1,7 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "simulacro-corteSuprema:lib"
+
+    - path: "./test"
+      component: "simulacro-corteSuprema:test:simulacro-corteSuprema-test"
