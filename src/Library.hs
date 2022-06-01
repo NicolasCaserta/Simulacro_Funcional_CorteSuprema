@@ -23,7 +23,7 @@ estaDentroDe :: Eq a => [a] -> [a] -> Bool
 estaDentroDe [] _ = True
 estaDentroDe _ [] = False
 estaDentroDe a b | a == take (length a) b = True
-                 | otherwise = False
+                 | otherwise = estaDentroDe a (tail b)
 
 ---- Punto 1 -- Las Leyes ----
 
