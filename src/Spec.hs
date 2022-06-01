@@ -6,6 +6,8 @@ import Test.Hspec
 correrTests :: IO ()
 correrTests = hspec $ do
   describe "Tests de Ejemplo" $ do
+    it "La leyProfesionalizacionTenisMesa es compatible con la leyTenis" $ do
+      esCompatible leyProfesionalizacionTenisMesa leyTenis `shouldBe` True
     it "El juezSectorFinanciero vota por la leyMedicinalCannabis" $ do
       juezSectorFinanciero leyMedicinalCannabis `shouldBe` True
     it "Se cumple la condición mediante la función borocotizar" $ do

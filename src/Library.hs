@@ -11,13 +11,33 @@ data Ley = UnaLey {
 
 leyMedicinalCannabis = UnaLey {tema = "Cannabis", presupuesto = 5, partidosImpulsores = ["Cambio de Todos","Sector Financiero"]}
 leyEducacionSuperior = UnaLey {tema = "Educacion Superior", presupuesto = 30, partidosImpulsores = ["Docentes Universitarios","Partido de Centro Federal"]}
-leyProfesionalizacionTenistaMesa = UnaLey {tema = "Profesionalizacion", presupuesto = 1, partidosImpulsores = ["Partido de Centro Federal","Liga de Deportistas Autónomos","Club Paleta Veloz"]}
+leyProfesionalizacionTenisMesa = UnaLey {tema = "Tenis de Mesa", presupuesto = 1, partidosImpulsores = ["Partido de Centro Federal","Liga de Deportistas Autónomos","Club Paleta Veloz"]}
 leyTenis = UnaLey {tema = "Tenis", presupuesto = 2, partidosImpulsores = ["Liga de Deportistas Autónomos"]}
 
 ---- Funciones Auxiliares ----
 
 between :: (Eq a, Enum a) => a -> a -> a -> Bool
 between n m x = elem x [n .. m]
+
+estaDentroDe :: Eq a => [a] -> [a] -> Bool
+estaDentroDe [] _ = True
+estaDentroDe _ [] = False
+estaDentroDe a b | a == take (length a) b = True
+                 | otherwise = False
+
+---- Punto 1 -- Las Leyes ----
+
+impulsanteEnComun :: Ley -> String -> Bool
+impulsanteEnComun ley1 impulsante = elem impulsante (partidosImpulsores ley1)
+
+tienenImpulsanteEnComun :: Ley -> Ley -> Bool
+tienenImpulsanteEnComun ley1 ley2 = any (impulsanteEnComun ley1) (partidosImpulsores ley2) 
+
+algunTemaEstaContenido :: Ley -> Ley -> Bool
+algunTemaEstaContenido ley1 ley2 = (estaDentroDe (tema ley1) (tema ley2)) || (estaDentroDe (tema ley2) (tema ley1))
+
+esCompatible :: Ley -> Ley -> Bool
+esCompatible ley1 ley2 = (tienenImpulsanteEnComun ley1 ley2) && (algunTemaEstaContenido ley1 ley2)
 
 --------------------------------------------------- Constitucionalidad de las Leyes ---------------------------------------------------
 
@@ -47,7 +67,7 @@ corteSuprema :: [Juez]
 corteSuprema = [juezOpinionPublica,juezSectorFinanciero,juezArcasEstado,juezArcasEstado',juezPartidoConservador]
 
 leyesEjemplo :: [Ley]
-leyesEjemplo = [leyMedicinalCannabis,leyEducacionSuperior,leyProfesionalizacionTenistaMesa,leyTenis]
+leyesEjemplo = [leyMedicinalCannabis,leyEducacionSuperior,leyProfesionalizacionTenisMesa,leyTenis]
 
 ---- Punto 1 ----
 
