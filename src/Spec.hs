@@ -5,6 +5,11 @@ import Test.Hspec
 
 correrTests :: IO ()
 correrTests = hspec $ do
-  describe "Test de ejemplo" $ do
+  describe "Tests de Ejemplo" $ do
     it "El juezSectorFinanciero vota por la leyMedicinalCannabis" $ do
       juezSectorFinanciero leyMedicinalCannabis `shouldBe` True
+    it "Se cumple la condición mediante la función borocotizar" $ do
+      seCumpleCondicion leyEducacionSuperior corteSuprema `shouldBe` True
+    it "Se cumple que es constitucional con 3 nuevos Jueces" $ do
+      constitucionalesConNuevosJueces [juezAfirmativo,juezInventadoVago,juezPresupuestario] leyesEjemplo corteSuprema `shouldBe` [UnaLey {tema = "Educacion Superior", presupuesto = 30, partidosImpulsores = ["Docentes Universitarios","Partido de Centro Federal"]}]
+    
